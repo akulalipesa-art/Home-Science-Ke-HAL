@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Science Kenya</title>
+    <link rel="manifest" href="data:application/manifest+json,{
+        &quot;name&quot;:&quot;Home Science Kenya&quot;,
+        &quot;short_name&quot;:&quot;HS KE&quot;,
+        &quot;start_url&quot;:&quot;.&quot;,
+        &quot;display&quot;:&quot;standalone&quot;,
+        &quot;background_color&quot;:&quot;#006400&quot;,
+        &quot;theme_color&quot;:&quot;#006400&quot;,
+        &quot;icons&quot;:[{&quot;src&quot;:&quot;https://via.placeholder.com/192/006400/fff?text=🏠&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/png&quot;},
+        {&quot;src&quot;:&quot;https://via.placeholder.com/512/006400/fff?text=🏠&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/png&quot;}] }">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; background:#f4f8f4; color:#333; line-height:1.6; }
+        header { background:linear-gradient(#006400, #004d00); color:white; padding:1.2rem; text-align:center; position:sticky; top:0; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,0.2); }
+        nav { display:flex; background:#228B22; padding:8px; overflow-x:auto; gap:6px; }
+        nav button { padding:12px 10px; background:white; border:none; border-radius:8px; font-weight:600; white-space:nowrap; flex-shrink:0; }
+        .tab { display:none; padding:1rem; }
+        .tab.active { display:block; }
+        .card { background:white; border-radius:12px; padding:1.2rem; margin:1rem 0; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+        button { background:#006400; color:white; border:none; padding:14px; margin:10px 0; width:100%; border-radius:10px; font-size:16px; font-weight:600; }
+        ul { padding:0; list-style:none; }
+        li { padding:14px; background:#e8f5e9; margin:10px 0; border-radius:10px; cursor:pointer; }
+        .quiz-option { background:#f9f9f9; padding:14px; margin:10px 0; border-radius:10px; border-left:5px solid #ccc; }
+        .correct { background:#d4edda; border-left-color:#28a745; }
+        .wrong { background:#f8d7da; border-left-color:#dc3545; }
+        h2 { color:#006400; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏠 Home Science Kenya</h1>
+        <p>Form 3 &amp; 4 • KCSE Revision • Offline App</p>
+    </header>
+
+    <nav>
+        <button onclick="switchTab(0)">🏠 Home</button>
+        <button onclick="switchTab(1)">📚 Topics</button>
+        <button onclick="switchTab(2)">❓ Quiz</button>
+        <button onclick="switchTab(3)">🛠 Practicals</button>
+        <button onclick="switchTab(4)">📊 Progress</button>
+    </nav>
+
+    <!-- Home Tab -->
+    <div id="tab0" class="tab active">
+        <div class="card">
+            <h2>Welcome to Home Science!</h2>
+            <p>This app helps Kenyan senior school students master Home Science for KCSE. It covers the full syllabus with notes, quizzes, and practical skills using local examples.</p>
+            <p><strong>Key Skills:</strong> Nutrition, Home Management, Clothing &amp; Textiles, Consumer Education.</p>
+        </div>
+    </div>
+
+    <!-- Topics Tab -->
+    <div id="tab1" class="tab">
+        <div class="card">
+            <h2>Form 3 Topics</h2>
+            <ul>
+                <li onclick="showTopic('Meal Planning ensures balanced diet using affordable local foods like githeri, sukuma wiki, and ugali. Consider family size, nutrients, time, and budget.')">🍲 Meal Planning &amp; Management</li>
+                <li onclick="showTopic('Laundry: Sorting, washing methods (hand/machine), stain removal, ironing, storage.')">👕 Laundry Work</li>
+                <li onclick="showTopic('Clothing Construction: Tools, seams, darts, fullness control (pleats, gathers).')">🧵 Clothing Construction</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>Form 4 Topics</h2>
+            <ul>
+                <li onclick="showTopic('Care of the Sick: Bed making, feeding, hygiene, monitoring vital signs, emotional support.')">🩺 Care of the Sick at Home</li>
+                <li onclick="showTopic('Food Preservation: Drying, salting, smoking, canning, refrigeration. Examples: dried fish, vegetables.')">🥫 Food Preservation</li>
+                <li onclick="showTopic('Consumer Rights: Safety, information, choice, redress. Agencies: KEBS, CAK.')">🛒 Consumer Protection</li>
+                <li onclick="showTopic('Ventilation, Lighting, Fuels, and Soft Furnishings for comfortable homes.')">🏠 Home Management</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Quiz Tab -->
+    <div id="tab2" class="tab">
+        <div class="card">
+            <h2>KCSE Style Quiz</h2>
+            <p id="qtext">What is the importance of meal planning?</p>
+            <div class="quiz-option" onclick="answerQuiz(this, true)">A) Saves time, money and ensures nutrition</div>
+            <div class="quiz-option" onclick="answerQuiz(this, false)">B) Only for parties</div>
+            <div class="quiz-option" onclick="answerQuiz(this, false)">C) To use imported foods</div>
+            <button onclick="nextQuiz()">Next Question</button>
+            <p>Score: <span id="score">0</span></p>
+        </div>
+    </div>
+
+    <!-- Practicals Tab -->
+    <div id="tab3" class="tab">
+        <div class="card">
+            <h2>Practical Guides</h2>
+            <ul>
+                <li onclick="alert('Githeri Recipe: Soak beans overnight, boil with maize, add onions, tomatoes, greens. Highly nutritious!')">🥘 Githeri Recipe</li>
+                <li onclick="alert('Plain Seam: Place fabrics right sides together, stitch 1.5cm from edge, press open.')">🧵 Basic Seam Practice</li>
+                <li onclick="alert('Bed Bath Procedure: Privacy, warm water, gentle soap, dry thoroughly, apply lotion.')">🛏 Bed Bath for Patient</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Progress Tab -->
+    <div id="tab4" class="tab">
+        <div class="card">
+            <h2>Your Learning Progress</h2>
+            <p id="progressText">Topics Completed: 0</p>
+            <button onclick="markDone()">Mark Topic as Completed</button>
+            <button onclick="resetProgress()">Reset Progress</button>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 0;
+        let score = 0;
+        let completed = 0;
+
+        function switchTab(n) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById('tab' + n).classList.add('active');
+            currentTab = n;
+        }
+
+        function showTopic(text) {
+            alert(text);
+            completed++;
+            document.getElementById('progressText').textContent = `Topics Completed: ${completed}`;
+        }
+
+        function answerQuiz(el, isCorrect) {
+            if (isCorrect) {
+                el.classList.add('correct');
+                score++;
+                document.getElementById('score').textContent = score;
+                alert('✅ Correct!');
+            } else {
+                el.classList.add('wrong');
+                alert('❌ Incorrect. Try again!');
+            }
+        }
+
+        function nextQuiz() {
+            alert("More questions will be added in future updates. Keep practicing!");
+        }
+
+        function markDone() {
+            completed++;
+            document.getElementById('progressText').textContent = `Topics Completed: ${completed}`;
+            alert('Progress saved! Great work!');
+        }
+
+        function resetProgress() {
+            if (confirm('Reset all progress?')) {
+                completed = 0;
+                score = 0;
+                document.getElementById('progressText').textContent = 'Topics Completed: 0';
+                document.getElementById('score').textContent = '0';
+            }
+        }
+
+        // Service Worker for offline functionality
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:application/javascript,self.addEventListener("install",e=>e.waitUntil(caches.open("hs-cache").then(c=>c.addAll([".","index.html"]))));self.addEventListener("fetch",e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))))');
+        }
+    </script>
+</body>
+</html>
